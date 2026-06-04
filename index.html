@@ -29,11 +29,20 @@
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
         .card {
-            background: #111111;
-            border: 1px solid #1a1a1a;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
+            .card {
+    background: rgba(17,17,17,0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+    transform: translateY(-4px);
+    border-color: #22c55e;
+}   
+        
 
         .card:hover {
             border-color: #2a2a2a;
@@ -508,7 +517,7 @@
                                 <div class="text-xs text-zinc-600">0 - 100%</div>
                             </label>
                         </div><div class="radio-option">
-                            <input type="radio" name="actuator-type" value=Switch" id="a-Switch">
+                            <input type="radio" name="actuator-type" value="auto" id="a-auto">
                             <label for="a-slider" class="radio-label">
                     <div class="text-sm font-medium mb-0.5">Switch</div>
                 <div class="text-xs text-zinc-600">0 - 100%</div>
