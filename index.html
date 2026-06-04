@@ -130,30 +130,29 @@
         }
 
         .toggle {
-            width: 44px;
-            height: 24px;
-            background: #2a2a2a;
-            border-radius: 12px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.25s;
-        }
-
+          width:60px;
+    height:30px;
+    background:#333;
+    border-radius:50px;
+    position:relative;
+    cursor:pointer;
+    transition:.3s;
+}
         .toggle.active {
             background: #22c55e;
         }
 
         .toggle::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: #fff;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            transition: transform 0.25s;
-        }
+             content:'';
+            position:absolute;
+            width:24px;
+            height:24px;
+            top:3px;
+            left:3px;
+            background:white;
+            border-radius:50%;
+            transition:.3s;
+}
 
         .toggle.active::after {
             transform: translateX(20px);
