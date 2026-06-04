@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <title>AquaSense</title>
-</head>
-   
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
-     
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://api.fontsource.org/fonts/inter/latin-400.css');
         @import url('https://api.fontsource.org/fonts/inter/latin-500.css');
@@ -34,20 +23,11 @@
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
         .card {
-            .card {
-    background: rgba(17,17,17,0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-.card:hover{
-    transform: translateY(-4px);
-    border-color: #22c55e;
-}   
-        
+            background: #111111;
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
 
         .card:hover {
             border-color: #2a2a2a;
@@ -135,29 +115,30 @@
         }
 
         .toggle {
-          width:60px;
-    height:30px;
-    background:#333;
-    border-radius:50px;
-    position:relative;
-    cursor:pointer;
-    transition:.3s;
-}
+            width: 44px;
+            height: 24px;
+            background: #2a2a2a;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
         .toggle.active {
             background: #22c55e;
         }
 
         .toggle::after {
-             content:'';
-            position:absolute;
-            width:24px;
-            height:24px;
-            top:3px;
-            left:3px;
-            background:white;
-            border-radius:50%;
-            transition:.3s;
-}
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.25s;
+        }
 
         .toggle.active::after {
             transform: translateX(20px);
@@ -358,13 +339,7 @@
                 </div>
                 <div class="badge bg-[#111] border border-[#1a1a1a]">
                     <span class="badge-dot" id="fb-dot"></span>
-                    <span class="text-zinc-500" id="fb-status">Firebase</sp
-                    backdrop-filter: blur(15px);
-                    background: rgba(10,10,10,.8);
-                    position: sticky;
-                    top:0;
-                    z-index:999;
-}
+                    <span class="text-zinc-500" id="fb-status">Firebase</span>
                 </div>
             </div>
         </div>
@@ -372,24 +347,16 @@
 
     <main class="max-w-6xl mx-auto px-6 py-8 space-y-8">
 
-        <section class="grid grid-cols-3 gap-4 mb-6">
-
-       <div class="card p-4 text-center">
-<h3 class="text-zinc-500">Temperature</h3>
-<p class="text-3xl font-bold text-cyan-400">28°C</p>
-</div>
-
-<div class="card p-4 text-center">
-<h3 class="text-zinc-500">pH</h3>
-<p class="text-3xl font-bold text-green-400">7.0</p>
-</div>
-
-<div class="card p-4 text-center">
-<h3 class="text-zinc-500">TDS</h3>
-<p class="text-3xl font-bold text-orange-400">350</p>
-</div>
-
-</section>
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-1">Bluetooth</h3>
+                        <p id="device-name" class="text-xl font-semibold">Not connected</p>
+                    </div>
+                    <button id="btn-connect-bt" class="btn-primary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        Connect
                     </button>
                 </div>
                 <div class="text-xs text-zinc-600 space-y-1">
@@ -522,23 +489,22 @@
                     <label class="text-xs text-zinc-600 mb-3 block">Control Type</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                        
+                            <input type="radio" name="actuator-type" value="switch" id="a-switch" checked>
+                            <label for="a-switch" class="radio-label">
+                                <div class="text-sm font-medium mb-0.5">Switch</div>
+                                <div class="text-xs text-zinc-600">On / Off</div>
                             </label>
                         </div>
                         <div class="radio-option">
                             <input type="radio" name="actuator-type" value="slider" id="a-slider">
                             <label for="a-slider" class="radio-label">
                                 <div class="text-sm font-medium mb-0.5">Slider</div>
-                                <div class="text-xs text-zinc-600">0 - 100%</div>
+                                <div class="text-xs text-zinc-600">0 - 1024</div>
                             </label>
-                        </div><div class="radio-option">
-                            <input type="radio" name="actuator-type" value="auto" id="a-auto">
-                            <label for="a-slider" class="radio-label">
-                    <div class="text-sm font-medium mb-0.5">Switch</div>
-                <div class="text-xs text-zinc-600">0 - 100%</div>
-                    
-            
-                
+                        </div>
+                    </div>
+                </div>
+                <div>
                     <label class="text-xs text-zinc-600 mb-3 block">Color</label>
                     <div class="flex gap-2">
                         <button class="act-color-option color-option bg-zinc-200 selected" data-color="white"></button>
@@ -554,9 +520,8 @@
     </div>
 
     <script type="module">
-        // Misi Kelompok 4: Bug CDN Firebase - Sengaja diturunkan versinya menjadi 8.0.0 agar struktur modular rusak
-        import { initializeApp, getApps, deleteApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-        import { getDatabase, ref, update, onValue } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+        import { initializeApp, getApps, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         const UART_SERVICE = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
         const UART_TX = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
@@ -955,6 +920,7 @@
                     }
                 } catch(e) {}
                 
+                // Misi Kelompok 2 Kelas 8B: Bug Syntax Error - Kurang kurung kurawal tutup '}'
                 var config = {
                     apiKey: apiKey,
                     databaseURL: dbUrl,
@@ -1182,14 +1148,13 @@
 
         var defaultSensors = [
             { id: '1', name: 'suhu', label: 'Temperature', unit: '\u00B0C', type: 'analog', color: 'cyan', value: 0 },
-            { id: '2', name: 'ph', label: 'pH', unit: '', type: 'analog', color: 'green', value: 0 },
-            { id: '3', name: 'tds', label: 'TDS', unit: 'ppm', type: 'analog', color: 'orange', value: 0 }
+            { id: '2', name: 'ldr', label: 'LDR Sensor', unit: '', type: 'analog', color: 'green', value: 0 }
         ];
-       var defaultActuators = [
-    { id: '4', name: 'lampu', label: 'Lamp', type: 'switch', color: 'white', value: 0 },
-    { id: '5', name: 'kipas', label: 'Fan', type: 'slider', color: 'cyan', value: 0 },
-    { id: '6', name: 'otomatis', label: 'Auto Mode', type: 'switch', color: 'green', value: 0 }
-];
+        var defaultActuators = [
+            { id: '4', name: 'lampu', label: 'Lamp', type: 'switch', color: 'white', value: 0 },
+            { id: '5', name: 'kipas', label: 'Fan', type: 'slider', color: 'cyan', value: 0 },
+            { id: '6', name: 'otomatis', label: 'Auto Mode', type: 'switch', color: 'green', value: 0 }
+        ];
         
         sensors = defaultSensors;
         actuators = defaultActuators;
@@ -1201,8 +1166,9 @@
         }
         
         logMessage('AquaSense initialized', 'ok');
-        logMessage('Known sensors: suhu, ph, tds', 'info');
-        logMessage('Known actuators: lampu, kipas', 'info');
+        logMessage('Known sensors: suhu, ldr', 'info');
+        logMessage('Known actuators: lampu, kipas, otomatis', 'info');
         logMessage('Waiting for Micro:bit...', 'info');
     </script>
 </body>
+</html>
