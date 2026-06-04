@@ -386,42 +386,6 @@
             </div>
         </section>
 
-        title>Add Parameter</title>
-</head>
-<body>
-
-    <h2>Input Data</h2>
-
-    <form>
-        <label>Nama:</label><br>
-        <input type="text" id="nama" placeholder="Masukkan nama"><br><br>
-
-        <label>Umur:</label><br>
-        <input type="number" id="umur" placeholder="Masukkan umur"><br><br>
-
-        <button type="button" onclick="tampilData()">
-            Simpan
-        </button>
-    </form>
-
-    <p id="hasil"></p>
-
-    <script>
-        function tampilData() {
-            let nama = document.getElementById("nama").value;
-            let umur = document.getElementById("umur").value;
-
-            document.getElementById("hasil").innerHTML =
-                "Nama: " + nama + "<br>Umur: " + umur;
-                class="max-w-6xl mx-auto px-6 py-5"
-                class="grid grid-cols-2 md:grid-cols-3"
-                class="text-zinc-500"
-        }
-    </script>
-
-</body>
-</html>
-
         <section>
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider">Sensors</h2>
@@ -1196,13 +1160,6 @@
         var defaultActuators = [
             { id: '4', name: 'lampu', label: 'Lamp', type: 'switch', color: 'white', value: 0 },
             { id: '5', name: 'kipas', label: 'Fan', type: 'slider', color: 'cyan', value: 0 }
-             id: '6',
-            name: 'otomatis',
-            label: 'Auto Mode',
-            type: 'switch',
-            color: 'green',
-         value 0
-    
         ];
         
         sensors = defaultSensors;
@@ -1214,12 +1171,9 @@
             createActuatorCard(actuators[m]);
         }
         
-
-
         logMessage('AquaSense initialized', 'ok');
         logMessage('Known sensors: suhu, ph, tds', 'info');
         logMessage('Known actuators: lampu, kipas', 'info');
         logMessage('Waiting for Micro:bit...', 'info');
     </script>
 </body>
-</html>
